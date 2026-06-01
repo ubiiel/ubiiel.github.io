@@ -15,6 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100dvh;
+    user-select: none;
 }
 
 .header {
@@ -23,6 +24,13 @@ body {
     gap: 6px;
     margin-top: 40px;
     flex-shrink: 0;
+    user-select: auto;
+    transition: transform 0.2s ease;
+
+}
+
+.header:active {
+    transform: translateY(3px);
 }
 
 #main {
@@ -37,13 +45,14 @@ body {
     color: white;
     padding: 5px 0;
     font-size: 30px;
+    user-select: none;
 }
 
 .areainpt {
     display: flex;
     justify-content: center;
     margin-top: 70px;
-    gap: 5px;
+    gap: 3px;
 }
 
 #caixa {
@@ -63,54 +72,97 @@ body {
 
 .btnok {
     display: flex;
+    height: 32px;
     width: 10%;
-    height: 28px;
-    background-color: transparent;
+    background-color: white;
     border-top-right-radius: 18px;
     border-bottom-right-radius: 18px;
     border-color: transparent;
-}
-
-.fa-bookmark {
-    color: white;
-    padding: 0;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-/* fazer animation depois de regular pra solid
-.fa-bookmark:hover {
-    transition: 0.3s;
-}*/
-
-.contLista {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    flex: 1;
-}
-
-.box {
-    background-color: whitesmoke;
-    flex: 1;
-    margin: 70px 35px 35px 35px;
-    border-radius: 30px;
-    display: flex;
-    position: relative;
-    justify-content: center;
     align-items: center;
 }
 
-#direitos {
-    position: absolute;
-    top: 103%;
-    color: rgba(240, 248, 255, 0.596);
-    font-size: 8px;
-    overflow-y: auto;
-    font-family: Arial, Helvetica, sans-serif;
+.fa-check {
+    cursor: pointer;
+    font-size: 30px;
+    flex: 1;
+    color: #CCCCFF;
+    transition: transform 1s ease;
+}
+
+.fa-check.clicado {
+    animation: animation-check 0.4s;
+}
+
+@keyframes animation-check {
+    0% {
+        color: #CCCCFF;
+    }
+    50% {
+        color: rgb(131, 131, 131);
+        transform: scale(1.1);
+    }
+    100% {
+        color: #CCCCFF;
+    }
+}
+
+
+.contLista {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex: 1;
+    background-color: whitesmoke;
+    margin: 70px 35px 35px 35px;
+    border-radius: 30px;
+    overflow: hidden;
+    scrollbar-width: none;
+    overflow-y: auto; /*rolagem interna se encher a */
+    padding: 10px;
+    position: relative;
 }
 
 #nulltxt {
     font-family: DynaPuff;
     color: rgba(79, 79, 79, 0.361);
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#nulltxt.sumido {
+    display: none;
+}
+
+#direitos {
+    position: absolute;
+    top: 98%;
+    color: rgba(135, 136, 136, 0.596);
+    font-size: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.item-lista {
+    height: 30px;
+    width: 100%;
+}
+
+.item-lista span {
+    font-family: DynaPuff;
+    font-size: 14px;
+    text-decoration: underline;
+    color: black;
 }
