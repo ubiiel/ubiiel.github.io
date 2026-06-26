@@ -12,6 +12,12 @@ const txtInput = document.querySelector('#caixa'); //CONSTANTE PARA REFERIR AO T
 const listBox = document.querySelector('.box');  //CONSTANTE PARA ADICIONAR O TEXTO NA BOX
 const listaVazia = document.querySelector('#nulltxt') //CONSTANTE PARA REMOVER O NULL QUANDO VAZIA
 
+
+txtInput.addEventListener('keydown', function (evento){
+    if (evento.key === "Enter") {
+        check.click()
+    }
+})
 check.addEventListener('click', function () {
     check.classList.add('clicado'); //MUDANCA DE COR DO CHECK
     let textosalvo = txtInput.value.trim(); //SALVA O TEXTO DIGITADO NA VARIAVEL LET 'TEXTOSALVO' //TRIM DESCONSIDERA ESPAÇOS NO COMEÇO E NO FIM
@@ -27,12 +33,59 @@ check.addEventListener('click', function () {
     caixa.value = ""; //LIMPA A CAIXA DEPOIS DE ADICIONAR NA LISTA
 
     const novoItem = document.createElement('div'); //CONSTANTE PARA CRIAR UM NOVO ITEM QUANDO DIGITADO
-    novoItem.classList.add('item-lista'); //MANIPULA O novoItem TRANSFORMANDO ELE NA CLASSE 'ITEM-LISTA'
-    listBox.appendChild(novoItem); //INSERE A DIV NA PAGINA
+    novoItem.classList.add('item-lista'); //MANIPULA O novoItem TRANSFORMANDO ELE NA CLASSE '.item-lista'
+    listBox.prepend(novoItem); //INSERE A DIV NA PAGINA
     novoItem.innerHTML = `
-        <input type="checkbox" id="checkbox">
-        <span>${textosalvo}</span>`; //ADICIONA A CHECKBOX E O ITEM ESCRITO NA LISTA
-})
+    <input type="checkbox" id="checkbox">
+    <span>${textosalvo}</span>`; //ADICIONA A CHECKBOX E O ITEM ESCRITO NA LISTA
+
+    const checkbox = novoItem.querySelector('input')
+    
+    checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+            listBox.appendChild(novoItem)
+        }
+        else {
+            const itemMarcado = listBox.querySelector('.item-lista input:checked')
+            if (itemMarcado) {
+                const divItemMarcado = itemMarcado.closest('.item-lista')
+                listBox.insertBefore(novoItem, divItemMarcado)
+            }
+            else {
+                listBox.append(novoItem)
+            }
+    
+        }
+    })
+});
+
+
+
+
+
+
+
+
+
+//ANIMACAO BOTOES ABAIXO DO INPUT
+
+const botaoEditar = document.querySelector('.editBtn')
+const botaoOrdenar = document.querySelector('.orderByBtn')
+
+botaoEditar.addEventListener('click', function () {
+    botaoEditar.classList.add('botaoEditarClicado')
+    setTimeout(() => {
+        botaoEditar.classList.remove('botaoEditarClicado')
+    }, 300);
+});
+
+botaoOrdenar.addEventListener('click', function () {
+    botaoOrdenar.classList.add('botaoOrdenarClicado')
+    setTimeout(() => {
+        botaoOrdenar.classList.remove('botaoOrdenarClicado')
+    }, 300);
+});
+
 
 
 
@@ -42,6 +95,7 @@ const reloadPage = document.querySelector('#main'); //CONSTANTE PARA DAR RELOAD 
 reloadPage.addEventListener('click', function () {
     window.location.reload(); //RELOAD AO CLICAR EM 'GEGELIST.COM'
 })
+
 
 
 
