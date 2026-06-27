@@ -64,7 +64,7 @@ body {
     border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
     caret-color: rgb(207, 60, 60);
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(53, 52, 52);
     font-family: "DynaPuff";
     outline: none;
@@ -205,7 +205,7 @@ body {
 
 #direitos {
     position: absolute;
-    bottom: 10px;
+    bottom: 12px;
     color: rgba(135, 136, 136, 0.596);
     font-size: 8px;
     left: 50%;
